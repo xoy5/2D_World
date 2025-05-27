@@ -89,22 +89,22 @@ void Game::UpdateModel(float dt)
 	if (boxRect.left < walls.left)
 	{
 		dir.x = -dir.x;
-		posBox.x = walls.left;
+		posBox.x = float(walls.left);
 	}
 	else if (boxRect.right > walls.right)
 	{
 		dir.x = -dir.x;
-		posBox.x = walls.right - boxRect.GetWidth();
+		posBox.x = float(walls.right - boxRect.GetWidth());
 	}
 	if (boxRect.top < walls.top)
 	{
 		dir.y = -dir.y;
-		posBox.y = walls.top;
+		posBox.y = float(walls.top);
 	}
 	else if (boxRect.bottom > walls.bottom)
 	{
 		dir.y = -dir.y;
-		posBox.y = walls.bottom - boxRect.GetHeight();
+		posBox.y = float(walls.bottom - boxRect.GetHeight());
 	}
 }
 
