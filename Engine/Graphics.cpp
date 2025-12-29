@@ -26,7 +26,7 @@
 #include <math.h>
 #include <string>
 #include <array>
-#include "GameMath.h"
+#include "MathCircle.h"
 
 // Ignore the intellisense error "cannot open source file" for .shh files.
 // They will be created during the build sequence before the preprocessor runs.
@@ -371,8 +371,8 @@ void Graphics::DrawLine(const Vei2& p, const Vei2& q, int thickness, const Color
 
 void Graphics::DrawCircle(const Vei2& pos, float radius, const Color& c, float angleStart, float angleEnd)
 {
-	angleStart = gm::deg360(angleStart);
-	angleEnd = gm::deg360(angleEnd);
+	angleStart = mc::deg360(angleStart);
+	angleEnd = mc::deg360(angleEnd);
 
 	const float epsilon = 0.0001f;
 
@@ -452,6 +452,87 @@ void Graphics::DrawDisabled(const RectI& rect)
 			PutPixel(xDest, yDest, blend);
 		}
 	}
+}
+
+void Graphics::DrawLine(Vec2 p0, Vec2 p1, Color c)
+{
+	float m = 0.0f;
+	if (p1.x != p0.x)
+	{
+		m = (p1.y - p0.y) / (p1.x - p0.x);
+	}
+
+	if (p1.x != p0.x && std::abs(m) <= 1.0f)
+	{
+		if (p0.x > p1.x)
+		{
+			std::swap(p0, p1);
+		}
+
+		const float b = p0.y - m * p0.x;
+
+		for (int x = (int)p0.x; x < (int)p1.x; x++)
+		{
+			const float y = m * (float)x + b;
+
+			const int yi = (int)y;
+			if (x >= 0 && x < ScreenWidth && yi >= 0 && yi < ScreenHeight)
+			{
+				PutPixel(x, yi, c);
+			}
+		}
+	}
+	else
+	{
+		if (p0.y > p1.y)
+		{
+			std::swap(p0, p1);
+		}
+
+		const float w = (p1.x - p0.x) / (p1.y - p0.y);
+		const float p = p0.x - w * p0.y;
+
+		for (int y = (int)p0.y; y < (int)p1.y; y++)
+		{
+			const float x = w * (float)y + p;
+
+			const int xi = (int)x;
+			if (xi >= 0 && xi < ScreenWidth && y >= 0 && y < ScreenHeight)
+			{
+				PutPixel(xi, y, c);
+			}
+		}
+	}
+}
+
+void Graphics::DrawClosedPolyline(const std::vector<Vec2>& verts, Color c)
+{
+	for (auto i = verts.begin(); i != std::prev(verts.end()); i++)
+	{
+		DrawLine(*i, *std::next(i), c);
+	}
+	DrawLine(verts.back(), verts.front(), c);
+}
+
+void Graphics::DrawClosedPolyline(const std::vector<Vec2>& verts, Vec2 translation, float scale_x, float scale_y, Color c)
+{
+	const auto xform = [&](Vec2 v)
+		{
+			v.x *= scale_x;
+			v.y *= scale_y;
+			v += translation;
+			return v;
+		};
+
+	const Vec2 front = xform(verts.front());
+	Vec2 cur = front;
+	for (auto i = verts.begin(); i != std::prev(verts.end()); i++)
+	{
+		const Vec2 next = xform(*std::next(i));
+		DrawLine(cur, next, c);
+		cur = next;
+	}
+	DrawLine(cur, front, c);
 }
 
 Color Graphics::GetPixel(int x, int y) const

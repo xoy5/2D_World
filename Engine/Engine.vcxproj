@@ -138,12 +138,16 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
+    <ClInclude Include="CoordinateTransformer.h" />
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
@@ -153,12 +157,14 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="MouseCameraController.h" />
     <ClInclude Include="MyMessageBox.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteEffect.h" />
+    <ClInclude Include="Star.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="TextBox.h" />
     <ClInclude Include="Vec2.h" />

@@ -94,6 +94,10 @@ public:
 
 	void DrawDisabled(const RectI& rect);
 
+	void DrawLine(Vec2 p0, Vec2 p1, Color c);
+	void DrawClosedPolyline(const std::vector<Vec2>& verts, Color c);
+	void DrawClosedPolyline(const std::vector<Vec2>& verts, Vec2 translation, float scale_x, float scale_y, Color c);
+
 	template<typename E>
 	void DrawSprite(float x, float y, const Surface& s, E effect)
 	{

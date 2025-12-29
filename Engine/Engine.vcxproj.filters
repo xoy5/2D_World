@@ -16,73 +16,43 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{8b6c92a8-f65d-451e-80e3-d65773602b92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core">
-      <UniqueIdentifier>{ea6ea685-a11a-4a7c-bd18-0bc82c8447a7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Engine">
       <UniqueIdentifier>{cfa157ae-cfc4-40a3-9a2d-5868b5f7e65b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Engine\Interface">
       <UniqueIdentifier>{ea3a37c0-cee3-42bc-ae65-8f02e3adb1ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core">
-      <UniqueIdentifier>{045a9b02-daa5-47b0-9ee4-7e4a6815a97f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{d3535e89-3ebd-4ee3-a818-f6c8689c5cc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ChiliCore">
+      <UniqueIdentifier>{2410be2a-3d64-4b66-9583-722d2a7620fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ChiliCore">
+      <UniqueIdentifier>{045a9b02-daa5-47b0-9ee4-7e4a6815a97f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Math">
+      <UniqueIdentifier>{16f14354-f466-4669-900b-7097ed22b9b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Graphics">
+      <UniqueIdentifier>{e43e9168-1e32-446b-9aab-692a4851908a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Graphics\2D">
+      <UniqueIdentifier>{9edc669c-1e5d-49ad-a9db-314f857bdb55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ChiliWin.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ChiliException.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="COMInitializer.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="DXErr.h">
-      <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Header Files\Engine\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="SoundEffect.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="MainWindow.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="MyMessageBox.h">
       <Filter>Header Files\Engine\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteEffect.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="TextBox.h">
       <Filter>Header Files\Engine\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="InterfaceObject.h">
       <Filter>Header Files\Engine\Interface</Filter>
@@ -90,26 +60,83 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Colors.h">
-      <Filter>Header Files\Core</Filter>
+    <ClInclude Include="Star.h">
+      <Filter>Header Files\Engine\Graphics\2D</Filter>
     </ClInclude>
-    <ClInclude Include="FrameTimer.h">
-      <Filter>Header Files\Core</Filter>
+    <ClInclude Include="MouseCameraController.h">
+      <Filter>Header Files\Engine\Graphics\2D</Filter>
     </ClInclude>
-    <ClInclude Include="Vec2.h">
-      <Filter>Header Files\Core</Filter>
+    <ClInclude Include="Drawable.h">
+      <Filter>Header Files\Engine\Graphics\2D</Filter>
     </ClInclude>
-    <ClInclude Include="Rect.h">
-      <Filter>Header Files\Core</Filter>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Engine\Graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Engine\Graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="ChiliException.h">
+      <Filter>Header Files\ChiliCore</Filter>
+    </ClInclude>
+    <ClInclude Include="ChiliWin.h">
+      <Filter>Header Files\ChiliCore</Filter>
+    </ClInclude>
+    <ClInclude Include="COMInitializer.h">
+      <Filter>Header Files\ChiliCore</Filter>
+    </ClInclude>
+    <ClInclude Include="DXErr.h">
+      <Filter>Header Files\ChiliCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Header Files\ChiliCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Header Files\ChiliCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\ChiliCore</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEffect.h">
+      <Filter>Header Files\ChiliCore</Filter>
+    </ClInclude>
+    <ClInclude Include="MainWindow.h">
+      <Filter>Header Files\ChiliCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\ChiliCore</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Header Files\Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameTimer.h">
+      <Filter>Header Files\Engine\Math</Filter>
     </ClInclude>
     <ClInclude Include="MathCircle.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Header Files\Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec2.h">
+      <Filter>Header Files\Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Header Files\Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteEffect.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Surface.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="CoordinateTransformer.h">
+      <Filter>Header Files\Engine\Graphics\2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -117,28 +144,25 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DXErr.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\ChiliCore</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\ChiliCore</Filter>
     </ClCompile>
     <ClCompile Include="Keyboard.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\ChiliCore</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\ChiliCore</Filter>
     </ClCompile>
     <ClCompile Include="Sound.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\ChiliCore</Filter>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\ChiliCore</Filter>
     </ClCompile>
     <ClCompile Include="COMInitializer.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\ChiliCore</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\Engine</Filter>
@@ -147,10 +171,13 @@
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\ChiliCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Surface.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
