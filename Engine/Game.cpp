@@ -22,12 +22,55 @@
 #include "Game.h"
 #include <assert.h>
 #include <algorithm>
+#include "Star.h"
 
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
-	gfx(wnd)
+	gfx(wnd),
+	ct(gfx),
+	cam(ct),
+	camCtrl(wnd.mouse, cam)
 {
+	std::mt19937 rng(std::random_device{}());
+	std::uniform_real_distribution<float> xDist(-worldWidth / 2.0f, worldWidth / 2.0f);
+	std::uniform_real_distribution<float> yDist(-worldHeight / 2.0f, worldHeight / 2.0f);
+
+	std::normal_distribution<float> radDist(meanStarRadius, devStarRadius);
+	std::normal_distribution<float> ratDist(meanInnerRatio, devInnerRatio);
+	std::normal_distribution<float> flareDist(meanFlares, devFlares);
+	std::normal_distribution<float> colorFreqDist(meanColorFreq, devColorFreq);
+	std::uniform_real_distribution<float> phaseDist(0.0f, 2.0f * 3.14159f);
+	std::normal_distribution<float> radiusAmplitudeDist(meanRadiusAmplitude, devRadiusAmplitude);
+	std::normal_distribution<float> radiusFreqDist(meanRadiusFreq, devRadiusFreq);
+
+	const Color colors[] = { Colors::Red, Colors::Green, Colors::Blue, Colors::Cyan, Colors::Yellow, Colors::Magenta };
+	std::uniform_int_distribution<size_t> colorSampler(0, std::end(colors) - std::begin(colors));
+
+	while (stars.size() < nStars)
+	{
+		const auto rad = std::clamp(radDist(rng), minStarRadius, maxStarRadius);
+		const Vec2 pos = { xDist(rng), yDist(rng) };
+		const float radiusAmplitude = std::clamp(radiusAmplitudeDist(rng), minRadiusAmplitude, maxRadiusAmplitude);
+		const float maxRad = rad * (1.0f + radiusAmplitude);
+		if (std::any_of(stars.begin(), stars.end(), [&](const FancyEntity& star)
+			{ return (star.GetPos() - pos).GetLength() < maxRad + star.GetMaxRadius(); }
+		))
+		{
+			continue;
+		};
+
+		const auto rat = std::clamp(ratDist(rng), minInnerRatio, maxInnerRatio);
+		const int flares = std::clamp((int)flareDist(rng), minFlares, maxFlares);
+		const Color c = colors[colorSampler(rng)];
+		const float colorFreq = std::clamp(colorFreqDist(rng), minColorFreq, maxColorFreq);
+		const float colorPhase = phaseDist(rng);
+		const float radiusFreq = std::clamp(radiusFreqDist(rng), minRadiusFreq, maxRadiusFreq);
+		const float radiusPhase = phaseDist(rng);
+
+		stars.emplace_back(pos, rad, rat, flares, c, colorFreq, colorPhase, radiusAmplitude, radiusFreq, radiusPhase);
+	}
+
 }
 
 void Game::Go()
@@ -73,12 +116,13 @@ void Game::ProcessInput()
 ///////////////////////////////////////
 
 //////////////// MOUSE ////////////////
-	while (!wnd.mouse.IsEmpty())
-	{
-		const auto e = wnd.mouse.Read();
-		// buttons
-		// editor
-	}
+	//while (!wnd.mouse.IsEmpty())
+	//{
+	//	const auto e = wnd.mouse.Read();
+	//	// buttons
+	//	// editor
+	//}
+	camCtrl.Update();
 ///////////////////////////////////////
 }
 
@@ -106,15 +150,28 @@ void Game::UpdateModel(float dt)
 		dir.y = -dir.y;
 		posBox.y = float(walls.bottom - boxRect.GetHeight());
 	}
+
+	for (auto& star : stars)
+	{
+		star.Update(dt);
+	}
 }
 
 void Game::ComposeFrame()
 {
-	const RectI boxRect = fontBase.GetRectForText(message, Vei2(posBox));
+	const RectI boxRect = fontBase.GetRectForText(message, Vei2(posBox)).GetExpanded(5);
 	gfx.DrawRect(boxRect, Colors::Blue);
 	fontBase.DrawText(message, Vei2(posBox), Colors::White, gfx);
 	// Draw FPS
 	const std::string fpsText = "FPS: " + std::to_string(FPS);
 	fontXs.DrawText(fpsText, Vei2{ 10, 10 }, Colors::White, gfx);
 
+	const auto vp = cam.GetViewportRect();
+	for (const auto& star : stars)
+	{
+		if (star.GetBoundingRect().IsOverlappingWith(vp))
+		{
+			cam.Draw(star.GetDrawable());
+		}
+	}
 }

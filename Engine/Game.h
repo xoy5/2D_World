@@ -31,6 +31,11 @@
 #include "Button.h"
 #include "TextBox.h"
 #include "MyMessageBox.h"
+#include "CoordinateTransformer.h"
+#include "Camera.h"
+#include "MouseCameraController.h"
+
+#include "Entity.h"
 
 class Game
 {
@@ -68,6 +73,10 @@ private:
 	FrameTimer ft;
 	MyMessageBox myMessageBox = MyMessageBox(&fontLg);
 
+	CoordinateTransformer ct;
+	Camera cam;
+	MouseCameraController camCtrl;
+
 	/////////// FPS ///////////
 	int FPS = 0;
 	float timeFrame = 0.0f;
@@ -77,9 +86,45 @@ private:
 
 	/********************************/
 	/*  User Variables  */
-	const std::string message = " Chili \nDirectX";
+	const std::string message = "  Chili  \n DirectX \nWojtkowski";
 	const RectI walls = Graphics::GetScreenRect();
 	Vec2 posBox = Vec2(Graphics::GetScreenCenter());
 	Vec2 dir = Vec2{ 1.0, 1.0f };
+
+	std::vector<FancyEntity> stars;
+
+	static constexpr float worldWidth = 10000.0f;
+	static constexpr float worldHeight = 6000.0f;
+	static constexpr int nStars = 1100;
+
+	static constexpr float meanStarRadius = 160.0f;
+	static constexpr float devStarRadius = 90.0f;
+	static constexpr float minStarRadius = 40.0f;
+	static constexpr float maxStarRadius = 300.0f;
+
+	static constexpr float meanInnerRatio = 0.4f;
+	static constexpr float devInnerRatio = 0.25f;
+	static constexpr float minInnerRatio = 0.15f;
+	static constexpr float maxInnerRatio = 0.8f;
+
+	static constexpr float meanFlares = 6.5f;
+	static constexpr float devFlares = 2.0f;
+	static constexpr int minFlares = 3;
+	static constexpr int maxFlares = 10;
+
+	static constexpr float meanColorFreq = 1.6f;
+	static constexpr float devColorFreq = 1.0f;
+	static constexpr float minColorFreq = 0.6f;
+	static constexpr float maxColorFreq = 4.0f;
+
+	static constexpr float meanRadiusAmplitude = 0.5f;
+	static constexpr float devRadiusAmplitude = 0.3f;
+	static constexpr float minRadiusAmplitude = 0.1f;
+	static constexpr float maxRadiusAmplitude = 0.9f;
+
+	static constexpr float meanRadiusFreq = 1.8f;
+	static constexpr float devRadiusFreq = 1.0f;
+	static constexpr float minRadiusFreq = 0.6f;
+	static constexpr float maxRadiusFreq = 4.0f;
 	/********************************/
 };
